@@ -25,7 +25,6 @@ const GetOne = (req, res) => {
 
 const Create = (req, res) => {
 
-    console.log(req)
 
     const { name, email } = req.body
 

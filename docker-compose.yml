@@ -10,5 +10,9 @@ services:
     environment:
       MONGO_INITDB_ROOT_USERNAME: root
       MONGO_INITDB_ROOT_PASSWORD: example
+    
+    api:
+      image: 
+      container_name: api
 volumes:
  mongo_data:
