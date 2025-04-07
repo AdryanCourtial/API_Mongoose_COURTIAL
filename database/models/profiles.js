@@ -23,6 +23,10 @@ const ProfilesShema = new Schema({
     },
     information: {
         type: InformationSchema
+    },
+    is_delated: {
+        type: Boolean, 
+        default: false
     }
 
 })

@@ -19,8 +19,22 @@ const GetAll = async(req, res) => {
 
 }
 
-const GetOne = (req, res) => {
+const GetOne = async (req, res) => {
+    const { id } = req.params
+
+    try {
+
+        const profiles = await Profiles.findById({
+            _id: id
+        })
     
+        res.status(200).json(profiles)
+
+    } catch (err) {
+
+        res.status(500).json(err)
+
+    }
 }
 
 const Create = (req, res) => {
@@ -36,16 +50,66 @@ const Create = (req, res) => {
     res.status(201).json()
 }
 
-const Update = (req, res) => {
+const Update = async (req, res) => {
+
+    const { id } = req.params
+    const { name, email } = req.body
+
+    const profilesUpdated = await Profiles.findOneAndUpdate({
+        _id: id
+    }, 
+    {
+        $set: {
+            name: name,
+            email: email
+        }
+    }, 
+    {
+        new: true
+    })
+
+    res.status(200).json(profilesUpdated)
+
+}
+
+const Delete = async (req, res) => {
+    const { id } = req.params
+
+    const profilesDelated = await Profiles.findOneAndUpdate({
+        _id: id
+    }, {
+        $set: {
+            is_delated: true
+        }
+    }, {
+        new: true
+    })
+
+    res.status(200).json(profilesDelated)
     
 }
 
-const Delete = (req, res) => {
-    
-}
+const AddExperience = async (req, res) => {
+    const { experience } = req.body
+    const { id } = req.params
 
-const AddExperience = (req, res) => {
-    
+    const addExperience = await Profiles.findOneAndUpdate(
+        {
+            _id: id
+        },
+        {
+            $push: {
+                experience: {
+                    ...experience
+                }
+            }
+        },
+        {
+            new: true
+        }
+    )
+
+    res.status(201).json(addExperience)
 }
 
 const DeleteExperience = (req, res) => {

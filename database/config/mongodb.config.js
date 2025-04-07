@@ -5,6 +5,8 @@ const ConnectDatabaseMongo = async () => {
     const env = process.env
     try {
 
+        console.log(`mongodb://${env.MONGO_USERNAME}:${env.MONGO_PASSWORD}@${env.MONGO_URL}:${env.MONGO_PORT}`)
+
         await mongoose.connect(`mongodb://${env.MONGO_USERNAME}:${env.MONGO_PASSWORD}@${env.MONGO_URL}:${env.MONGO_PORT}`);
 
         console.log("Database is Successfully Connected")
