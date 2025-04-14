@@ -112,20 +112,90 @@ const AddExperience = async (req, res) => {
     res.status(201).json(addExperience)
 }
 
-const DeleteExperience = (req, res) => {
-    
+const DeleteExperience = async (req, res) => {
+
+    const { id, exp } = req.params
+
+    const deleteExperience = await Profiles.findOneAndUpdate(
+        {
+            _id: id
+        },
+        {
+            $pull: {
+                experience: {
+                    _id: exp
+                }
+            }
+        },
+        {
+            new: true
+        }
+    )
+
+    res.status(201).json(deleteExperience)
 }
 
-const AddSkill = (req, res) => {
-    
+const AddSkill = async (req, res) => {
+
+    const { skill } = req.body
+    const { id } = req.params
+
+
+    const AddSkill = await Profiles.findOneAndUpdate(
+        {
+            _id: id
+        },
+        {
+            $push: {
+                skills: skill
+            }
+        },
+        { new: true }
+    )
+
+    res.status(201).json(AddSkill)
 }
 
-const DeleteSkill = (req, res) => {
-    
+const DeleteSkill = async (req, res) => {
+
+    const { id, skill } = req.params
+
+    console.log(id, skill)
+
+    const deleteSkill = await Profiles.findOneAndUpdate(
+        {
+            _id: id
+        },
+        {
+            $pull: {
+                skills: skill
+            }
+        },
+        {
+            new: true
+        }
+    )
+
+    res.status(201).json(deleteSkill)
 }
 
-const UpdateInformation = (req, res) => {
-    
+const UpdateInformation = async (req, res) => {
+    const { id } = req.params
+    const information = req.body
+
+    console.log(information)
+
+    const AddSkill = await Profiles.findOneAndUpdate(
+        {
+            _id: id
+        },
+        {
+            information: information
+        },
+        { new: true }
+    )
+
+    res.status(201).json(AddSkill)
 }
 
 module.exports = {

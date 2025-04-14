@@ -16,10 +16,10 @@ router.post("/profiles/:id/experience", ProfilesController.AddExperience)
 
 router.delete("/profiles/:id/experience/:exp", ProfilesController.DeleteExperience)
 
-router.get("/profiles/:id/skills", ProfilesController.AddSkill)
+router.post("/profiles/:id/skills", ProfilesController.AddSkill)
 
-router.get("/profiles/:id/skills/:skill ", ProfilesController.DeleteSkill)
+router.delete("/profiles/:id/skills/:skill ", ProfilesController.DeleteSkill)
 
-router.get("/profiles/:id/information", ProfilesController.UpdateInformation)
+router.put("/profiles/:id/information", ProfilesController.UpdateInformation)
 
 module.exports = router
